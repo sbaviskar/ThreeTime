@@ -5,17 +5,17 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Employ;
-import com.example.demo.repository.EmployRepository;
+import com.example.demo.model.Employee;
+import com.example.demo.repository.EmployeeRepository;
 
 @Service
-public class EmployService  {
+public class EmployeeService  {
 
-	@Autowired
-	EmployRepository repo;
+	@Autowired 
+	EmployeeRepository repo;
 	
 	
-	public String add(Employ d) {
+	public String add(Employee d) {
 		Random ran = new Random();
 		long tk = ran.nextLong();
 		d.setToken(""+tk) ;
@@ -24,18 +24,18 @@ public class EmployService  {
 	}
 	
 
-	public List<Employ> getAllData(){
-		
+	public List<Employee> getAllData(){
+		System.out.println("From Find");
 		return repo.findAll();
 	}
 	
 	public String getDataById(int id) {
-		Employ ep = repo.findById(id).get();
+		Employee ep = repo.findById(id).get();
 		return ep.getName();
 	}
 	
 	public String deletedUser(int id) {
-		Employ data = repo.findById(id).get();
+		Employee data = repo.findById(id).get();
 		repo.deleteById(id);
 		return "deleted : "+ data.toString();
 	}

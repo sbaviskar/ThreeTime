@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Employ {
+public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id ;
@@ -23,11 +23,11 @@ public class Employ {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public Employ() {
+	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Employ(int id, String name) {
+	public Employee(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
