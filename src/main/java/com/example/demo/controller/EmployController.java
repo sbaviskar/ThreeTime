@@ -1,8 +1,6 @@
-package com.example.demo;
-
+package com.example.demo.controller;
+ 
 import java.util.List;
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,41 +9,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Employ;
+import com.example.demo.service.EmployService;
+
 @RestController
 public class EmployController {
 
+
 	@Autowired
-	EmployRepository repo;
+	EmployService es ;
 	
 	// for inserting data  
 	@PostMapping("/employ")
 	public String add(@RequestBody Employ d) {
-		Random ran = new Random();
-		long tk = ran.nextLong();
-		d.token = ""+tk ;
-		repo.save(d);
-		return d.token;
+		            
+		return es.add(d);
 	}
 	// All employ data
 	@GetMapping("/employ")
-	public List<Employ> getInfo() {
-		System.out.println("TestPrint");	
-		return repo.findAll();
+	public List<Employ> getInfo() {	
+		return es.getAllData();
 	}
 	// Id Specific employ data 
 	@GetMapping("/employ/{id}")
-	public String getInfo(@PathVariable int id) {
-		Employ ep = repo.findById(id).get();
-		System.out.println("TestPrint");	
-		return ep.name;
+	public String getInfo(@PathVariable int id) {	
+		return es.getDataById(id);
 	}
 
 	@DeleteMapping("/employ/{id}")
 	public String delData(@PathVariable int id) {
-		Employ data = repo.findById(id).get();
-		System.out.println(data);
-		repo.deleteById(id);
-		return "deleted "+ data.toString();
+		return es.deletedUser(id);
 	}
 
 

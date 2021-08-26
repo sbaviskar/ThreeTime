@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ public class Employ {
 		return "Emp [id=" + id + ", name=" + name + "]";
 	}
 	public String getToken() {
-		return token;
+		return this.token;
 	}
 	public void setToken(String token) {
 		this.token = token;
