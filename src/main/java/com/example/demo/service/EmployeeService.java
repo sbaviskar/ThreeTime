@@ -1,5 +1,6 @@
 package com.example.demo.service;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ public class EmployeeService  {
 	EmployeeRepository repo;
 	
 	
-	public String add(Employee d) {
+	public Employee add(Employee d) {
 		Random ran = new Random();
 		long tk = ran.nextLong();
 		d.setToken(""+tk) ;
 		repo.save(d);
-		return d.getToken();
+		return d;
 	}
 	
 
@@ -29,15 +30,15 @@ public class EmployeeService  {
 		return repo.findAll();
 	}
 	
-	public String getDataById(int id) {
+	public Employee getDataById(int id) {
 		Employee ep = repo.findById(id).get();
-		return ep.getName();
+		return ep;
 	}
 	
-	public String deletedUser(int id) {
+	public Employee deletedUser(int id) {
 		Employee data = repo.findById(id).get();
 		repo.deleteById(id);
-		return "deleted : "+ data.toString();
+		return data;
 	}
 	
 }

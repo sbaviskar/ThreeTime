@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Employee;
 import com.example.demo.service.EmployeeService;
@@ -23,9 +24,8 @@ public class EmployeeController {
 	
 	// for inserting data  
 	@PostMapping("")
-	public String add(@RequestBody Employee d) {
-		            
-		return es.add(d);
+	public Employee add(@RequestBody Employee d) {
+		   return es.add(d);
 	}
 	// All employee data
 	@GetMapping("")
@@ -35,12 +35,18 @@ public class EmployeeController {
 	}
 	// Id Specific employee data 
 	@GetMapping("/{id}")
-	public String getInfo(@PathVariable int id) {	
-		return es.getDataById(id);
+	public Employee  getInfo(@PathVariable int id) {	
+		Employee emp =  es.getDataById(id);
+		if(emp == null)
+			throw new UserException("id "+ id);
+		else
+			System.out.println(emp.toString());
+		return emp;
+		
 	}
 
 	@DeleteMapping("/{id}")
-	public String delData(@PathVariable int id) {
+	public Employee delData(@PathVariable int id) {
 		return es.deletedUser(id);
 	}
 
